@@ -20,13 +20,13 @@ export class UserController {
   //   this.userService = userService
   // }
 
-  // constructor(private userService: UserService) {}
+  constructor(private userService: UserService) {}
 
-  private userService;
+  // private userService;
 
-  constructor() {
-    this.userService = new UserService();
-  }
+  // constructor() {
+  //   this.userService = new UserService();
+  // }
 
   @Get('')
   getUsers() {
@@ -41,28 +41,32 @@ export class UserController {
   store(@Req() req: Request) {
     Logger.debug('Hi');
     console.log(req.body);
-    return req.body;
+    // return req.body;
+    return this.userService.create(req);
   }
 
-  @Patch('')
-  update(@Req() req: Request) {
+  @Patch(':userId')
+  update(@Req() req: Request, @Param() param: { userId: number }) {
     console.log(req.body);
-    return req.body;
+    // return req.body;
+    return this.userService.update(req, param);
   }
 
-  @Put('')
+  @Put(':userId')
   updatePut(@Req() req: Request) {
     console.log(req.body);
     return req.body;
   }
 
   @Get(':userId')
-  getUser(@Param() params: { userId: number }) {
-    return params;
+  getUser(@Param() param: { userId: number }) {
+    // return params;
+    return this.userService.getUser(param);
   }
 
   @Delete(':userId')
-  deleteUser(@Param() params: { userId: number }) {
-    return params;
+  deleteUser(@Param() param: { userId: number }) {
+    // return param;
+    return this.userService.delete(param);
   }
 }
