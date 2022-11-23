@@ -11,6 +11,8 @@ import {
   Body,
 } from '@nestjs/common';
 import { Request } from 'express';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 import { UserService } from './user.service';
 
 @Controller('/user')
@@ -39,18 +41,21 @@ export class UserController {
   }
 
   @Post('')
-  store(@Body() body: any) {
+  store(@Body() createUserDto: CreateUserDto) {
     Logger.debug('Hi');
-    console.log(body);
+    console.log(createUserDto);
     // return req.body;
-    return this.userService.create(body);
+    return this.userService.create(createUserDto);
   }
 
   @Patch(':userId')
-  update(@Body() body: any, @Param() param: { userId: number }) {
-    console.log(body);
+  update(
+    @Body() updateUserDto: UpdateUserDto,
+    @Param() param: { userId: number },
+  ) {
+    console.log(updateUserDto);
     // return req.body;
-    return this.userService.update(body, param);
+    return this.userService.update(updateUserDto, param);
   }
 
   @Put(':userId')
