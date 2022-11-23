@@ -17,15 +17,15 @@ export class UserService {
     return cerateUserDto;
   }
 
-  update(updateUserDto: UpdateUserDto, param: { userId: number }) {
-    return { body: updateUserDto, param };
+  update(updateUserDto: UpdateUserDto, userId: number) {
+    return { body: updateUserDto, userId };
   }
 
   delete(param: { userId: number }) {
     return param;
   }
 
-  getUser(param: { userId: number }) {
-    return param;
+  getUser(userId: number) {
+    return { userId };
   }
 }

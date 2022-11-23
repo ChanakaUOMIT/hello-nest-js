@@ -9,6 +9,7 @@ import {
   Put,
   Req,
   Body,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { Request } from 'express';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -51,11 +52,11 @@ export class UserController {
   @Patch(':userId')
   update(
     @Body() updateUserDto: UpdateUserDto,
-    @Param() param: { userId: number },
+    @Param('userId', ParseIntPipe) userId: number,
   ) {
     console.log(updateUserDto);
     // return req.body;
-    return this.userService.update(updateUserDto, param);
+    return this.userService.update(updateUserDto, userId);
   }
 
   @Put(':userId')
@@ -65,9 +66,9 @@ export class UserController {
   }
 
   @Get(':userId')
-  getUser(@Param() param: { userId: number }) {
+  getUser(@Param('userId', ParseIntPipe) userId: number) {
     // return params;
-    return this.userService.getUser(param);
+    return this.userService.getUser(userId);
   }
 
   @Delete(':userId')
