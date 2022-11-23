@@ -8,6 +8,7 @@ import {
   Post,
   Put,
   Req,
+  Body,
 } from '@nestjs/common';
 import { Request } from 'express';
 import { UserService } from './user.service';
@@ -38,18 +39,18 @@ export class UserController {
   }
 
   @Post('')
-  store(@Req() req: Request) {
+  store(@Body() body: any) {
     Logger.debug('Hi');
-    console.log(req.body);
+    console.log(body);
     // return req.body;
-    return this.userService.create(req);
+    return this.userService.create(body);
   }
 
   @Patch(':userId')
-  update(@Req() req: Request, @Param() param: { userId: number }) {
-    console.log(req.body);
+  update(@Body() body: any, @Param() param: { userId: number }) {
+    console.log(body);
     // return req.body;
-    return this.userService.update(req, param);
+    return this.userService.update(body, param);
   }
 
   @Put(':userId')
